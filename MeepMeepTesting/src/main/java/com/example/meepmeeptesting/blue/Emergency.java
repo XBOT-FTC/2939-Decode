@@ -16,7 +16,7 @@ public class Emergency {
         Pose2d startingPose = new Pose2d(
                 startPoseX,
                 startPoseY,
-                Math.toRadians(-127)
+                Math.toRadians(233)
         );
 
         RoadRunnerBotEntity robot = new DefaultBotBuilder(meepMeep)
@@ -28,7 +28,7 @@ public class Emergency {
         robot.runAction(
                 robot.getDrive()
                         .actionBuilder(startingPose)
-                        .strafeToLinearHeading(new Vector2d(-31, -48), Math.toRadians(-127))
+                        .strafeToLinearHeading(new Vector2d(-40, -48), Math.toRadians(233))
                         .waitSeconds(.5)
                         .build()
         );

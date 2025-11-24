@@ -10,8 +10,8 @@ public class Blocker2 {
     Servo blockerServo = null;
     boolean leftBumperPressed;
     boolean rightBumperPressed;
-    double leftBlockerClosePosition = 0.9;
-    double leftBlockerOpenPosition = 0.6;
+    double leftBlockerClosePosition = 0.85;
+    double leftBlockerOpenPosition = 0.67;
     double rightBlockerClosePosition = 0.35;
     double rightBlockerOpenPosition = 1;
     String direction;
@@ -39,38 +39,40 @@ public class Blocker2 {
 
     public void controlServo(Gamepad gamepad, Telemetry telemetry) {
         if (this.direction.equals("left")) {
-            if (gamepad.left_stick_x > 0) {
-                leftBlockerPose += .01;
+//            if (gamepad.left_stick_x > 0) {
+            if (gamepad.left_bumper && !previousLeftState) {
+//                leftBlockerPose += .01;
 
-//                if (isOpen) {
-//                    open();
-//                } else {
-//                    close();
-//                }
-            } else if (gamepad.left_stick_x < 0) {
-                leftBlockerPose -= .01;
-
-            } blockerServo.setPosition(leftBlockerPose);
-            // previousLeftState = gamepad.left_bumper;
+                if (isOpen) {
+                    open();
+                } else {
+                    close();
+                }
+//            } else if (gamepad.left_stick_x < 0) {
+//                leftBlockerPose -= .01;
+//
+//            } blockerServo.setPosition(leftBlockerPose);
+            } previousLeftState = gamepad.left_bumper;
         }
 
         if (this.direction.equals("right")) {
-            if (gamepad.right_stick_x > 0) {
-                rightBlockerPose +=.001;
-//                isOpen = !isOpen;
+//            if (gamepad.right_stick_x > 0) {
+            if (gamepad.right_bumper && !previousLeftState) {
+//                rightBlockerPose +=.001;
+                isOpen = !isOpen;
+
+                if (isOpen) {
+                    open();
+                } else {
+                    close();
+                }
+//            } else if (gamepad.right_stick_x < 0) {
+//                rightBlockerPose -=.001;
 //
-//                if (isOpen) {
-//                    open();
-//                } else {
-//                    close();
-//                }
-            } else if (gamepad.right_stick_x < 0) {
-                rightBlockerPose -=.001;
+//            }
+//            blockerServo.setPosition(rightBlockerPose);
 
-            }
-            blockerServo.setPosition(rightBlockerPose);
-
-            // previousRightState = gamepad.right_bumper;
+            } previousRightState = gamepad.right_bumper;
         }
 
     }

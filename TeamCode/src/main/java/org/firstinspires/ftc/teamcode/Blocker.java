@@ -8,10 +8,10 @@ public class Blocker {
     Servo blockerServo = null;
     boolean leftBumperPressed;
     boolean rightBumperPressed;
-    double leftBlockerClosePosition = 0.9;
-    double leftBlockerOpenPosition = 0.6;
-    double rightBlockerClosePosition = 0.3;
-    double rightBlockerOpenPosition = 1;
+    double leftBlockerClosePosition = 0.87;
+    double leftBlockerOpenPosition = 0.78;
+    double rightBlockerClosePosition = 0.58;
+    double rightBlockerOpenPosition = 0.72;
     String direction;
 
     // Fix twitches
