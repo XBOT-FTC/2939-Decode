@@ -30,9 +30,12 @@ public class Shooter {
         this.shooterPower = Math.max(shooterPower, 0);
     }
 
+    //REFACTOR
+    //I have no idea why you need to inject a motor here, potentially refactor this to use the local motor within the class
+    //we can also potentially use reverse power and PID to stop the motor faster to make it safer in case of extreme cases
     //Constant for shooter motors stop
-    public void setZero(DcMotor motor) {
-        motor.setPower(0);
+    public void setZero() {
+        shooterMotor.setPower(0);
     }
 
     public void setMotorPower(double power) {
