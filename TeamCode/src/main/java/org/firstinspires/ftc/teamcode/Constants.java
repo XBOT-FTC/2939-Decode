@@ -20,16 +20,19 @@ public class Constants {
         return "backRightMotor";
     }
 
+    // Color Sensor
+    public static String getColorSensorName () { return "Test"; }
+
     // Tuned values
-    public static double inPerTick = 0.023856904;
-    public static double lateralInPerTick = .02520816;
-    public static double trackWidthTicks = 8060.506364813945;
-    public static final double kA = .000078;
-    public static final double kV = 0.0003510462253567012;
-    public static final double kS = 1.1082062641862467;
-    public static final double maxWheelVel = 50;
-    public static final double minProfileAccel = -30;
-    public static final double maxProfileAccel = 50;
+//    public static double inPerTick = 0.023856904;
+//    public static double lateralInPerTick = .02520816;
+//    public static double trackWidthTicks = 8060.506364813945;
+//    public static final double kA = .000078;
+//    public static final double kV = 0.0003510462253567012;
+//    public static final double kS = 1.1082062641862467;
+//    public static final double maxWheelVel = 50;
+//    public static final double minProfileAccel = -30;
+//    public static final double maxProfileAccel = 50;
 
     // Shooter Constants
     public static String shooterMotor(){
@@ -40,32 +43,26 @@ public class Constants {
     public static double shooterPower = .3;
 
     // Auto calibration
-    public static double inPerTick3231 = 0.02393;
-    public static double lateralInPerTick3231 = 0.02519;
+    public static double inPerTick = 0.02393;
+    public static double lateralInPerTick = 0.02519;
 
-    public static double ks3231 = 1.0967513649697667;
+    public static double ks = 1.0967513649697667;
 
-    public static double kv3231 = 0.0042730455553834186;
+    public static double kv = 0.0042730455553834186;
 
-    public static double ka3231 = .00067;
+    public static double ka = .00067;
 
-    public static double trackWidth3231 = 1226.5643209432749;
+    public static double trackWidth = 1226.5643209432749;
 
-    public static double axialGain3231 = 3;
+    public static double axialGain = 3;
 
-    public static double axialVelGain3231 = 1.9;
+    public static double axialVelGain = 1.9;
 
-    public static double headingGain3231 = 4.5;
+    public static double headingGain = 4.5;
 
-    public static double headingVelGain3231 = .5;
+    public static double headingVelGain = .5;
 
-    public static double lateralGain3231 = 1.3;
+    public static double lateralGain = 1.3;
 
-    public static double lateralVelGain3231 = 0;
-
-    // Color Sensor
-    public static String getColorSensorName () { return "Test"; }
-
-
-
+    public static double lateralVelGain = 0;
 }

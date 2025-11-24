@@ -1,12 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.teamcode.Constants.axialGain3231;
-import static org.firstinspires.ftc.teamcode.Constants.axialVelGain3231;
-import static org.firstinspires.ftc.teamcode.Constants.headingGain3231;
-import static org.firstinspires.ftc.teamcode.Constants.headingVelGain3231;
-import static org.firstinspires.ftc.teamcode.Constants.ka3231;
-import static org.firstinspires.ftc.teamcode.Constants.lateralGain3231;
-import static org.firstinspires.ftc.teamcode.Constants.lateralVelGain3231;
+import static org.firstinspires.ftc.teamcode.Constants.ka;
 
 import androidx.annotation.NonNull;
 
@@ -71,14 +65,14 @@ public final class MecanumDrive {
                 RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD;
 
         // drive model parameters
-        public double inPerTick = Constants.inPerTick3231;
-        public double lateralInPerTick = Constants.lateralInPerTick3231;
-        public double trackWidthTicks = Constants.trackWidth3231;
+        public double inPerTick = Constants.inPerTick;
+        public double lateralInPerTick = Constants.lateralInPerTick;
+        public double trackWidthTicks = Constants.trackWidth;
 
         // feedforward parameters (in tick units)
-        public double kS = Constants.ks3231;
-        public double kV = Constants.kv3231;
-        public double kA = ka3231;
+        public double kS = Constants.ks;
+        public double kV = Constants.kv;
+        public double kA = Constants.ka;
 
         // path profile parameters (in inches)
         public double maxWheelVel = 50;
@@ -90,13 +84,13 @@ public final class MecanumDrive {
         public double maxAngAccel = Math.PI;
 
         // path controller gains
-        public double axialGain = axialGain3231;
-        public double lateralGain = lateralGain3231;
-        public double headingGain = headingGain3231; // shared with turn
+        public double axialGain = Constants.axialGain;
+        public double lateralGain = Constants.lateralGain;
+        public double headingGain = Constants.headingGain; // shared with turn
 
-        public double axialVelGain = axialVelGain3231;
-        public double lateralVelGain = lateralVelGain3231;
-        public double headingVelGain = headingVelGain3231; // shared with turn
+        public double axialVelGain = Constants.axialVelGain;
+        public double lateralVelGain = Constants.lateralVelGain;
+        public double headingVelGain = Constants.headingVelGain; // shared with turn
     }
 
     public static Params PARAMS = new Params();
