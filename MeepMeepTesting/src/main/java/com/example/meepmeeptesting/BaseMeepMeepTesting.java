@@ -1,0 +1,45 @@
+package com.example.meepmeeptesting;
+
+import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.Vector2d;
+import com.noahbres.meepmeep.MeepMeep;
+import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
+import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
+
+// THIS FILE SHOULD NOT BE MODIFIED FOR ANY TESTING PURPOSES. IF YOU WANT TO TEST, PLEASE PUT IT INTO THE SUBFOLDERS OR UNDER MEEP MEEP TESTING
+
+public class BaseMeepMeepTesting {
+    public static void main(String[] args) {
+        MeepMeep meepMeep = new MeepMeep(800);
+
+        double startPoseX = -56; //SmallTriangleAuto = 58
+        double startPoseY = 45; //SmallTriangleAuto = 0
+
+        Pose2d startingPose = new Pose2d(
+                startPoseX,
+                startPoseY,
+                Math.toRadians(127)
+        );
+
+        RoadRunnerBotEntity robot = new DefaultBotBuilder(meepMeep)
+                // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                .setConstraints(60, 60, Math.toRadians(90), Math.toRadians(90), 15)
+                .setStartPose(startingPose)
+                .build();
+
+        robot.runAction(
+                robot.getDrive()
+                        .actionBuilder(startingPose)
+                        // put your commands here
+                        .build()
+        );
+
+
+        meepMeep
+                .setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_DARK)
+                .setDarkMode(true)
+                .setBackgroundAlpha(0.95f)
+                .addEntity(robot)
+                .start();
+    }
+}
