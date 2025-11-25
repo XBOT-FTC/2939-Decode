@@ -1,18 +1,18 @@
 package org.firstinspires.ftc.teamcode;
+
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Blocker {
-    Servo blockerServo = null;
-    boolean leftBumperPressed;
-    boolean rightBumperPressed;
-    double leftBlockerClosePosition = 0.9;
-    double leftBlockerOpenPosition = 0.6;
-    double rightBlockerClosePosition = 0.3;
-    double rightBlockerOpenPosition = 1;
-    String direction;
+    Servo leftServo = null;
+    Servo rightServo = null;
+    double leftBlockerClosePosition = 0.87;
+    double leftBlockerOpenPosition = 0.78;
+    double rightBlockerClosePosition = 0.58;
+    double rightBlockerOpenPosition = 0.72;
 
     // Fix twitches
     boolean previousLeftState = false;
@@ -20,11 +20,9 @@ public class Blocker {
     boolean isOpen = false;
 
 
-    public Blocker(HardwareMap hardwareMap, Telemetry telemetry, String direction) {
-        blockerServo = hardwareMap.get(Servo.class,direction);
-        this.leftBumperPressed = false;
-        this.rightBumperPressed = false;
-        this.direction = direction;
+    public Blocker(HardwareMap hardwareMap, Telemetry telemetry) {
+        leftServo = hardwareMap.get(Servo.class,"left");
+        rightServo = hardwareMap.get(Servo.class,"right");
     }
 
     public void powerServo(Gamepad gamepad, Telemetry telemetry) {
@@ -32,51 +30,35 @@ public class Blocker {
     }
 
     public void controlServo(Gamepad gamepad, Telemetry telemetry) {
-        if (this.direction.equals("left")) {
-            if (gamepad.left_bumper && !previousLeftState) {
-                isOpen = !isOpen;
-
-                if (isOpen) {
-                    open();
-                } else {
-                    close();
-                }
+        if (gamepad.left_bumper && !previousLeftState) {
+            isOpen = !isOpen;
+            if (isOpen) {
+                open();
+                telemetry.addData("Servo", "Opening blocker");
+            } else {
+                close();
+                telemetry.addData("Servo", "Closing blocker");
             }
-            previousLeftState = gamepad.left_bumper;
         }
-
-        if (this.direction.equals("right")) {
-            if (gamepad.right_bumper && !previousRightState) {
-                isOpen = !isOpen;
-
-                if (isOpen) {
-                    open();
-                } else {
-                    close();
-                }
-            }
-            previousRightState = gamepad.right_bumper;
-        }
+        previousLeftState = gamepad.left_bumper;
+        previousRightState = gamepad.right_bumper;
     }
 
-    public double getServoPosition() {
-        return blockerServo.getPosition();
+    public double getLeftServoPosition() {
+        return leftServo.getPosition();
+    }
+
+    public double getRightServoPosition() {
+        return rightServo.getPosition();
     }
 
     public void open() {
-        if (direction.equals("left")){
-            blockerServo.setPosition(leftBlockerOpenPosition);
-        } else {
-            blockerServo.setPosition(rightBlockerOpenPosition);
-        }
-
+        leftServo.setPosition(leftBlockerOpenPosition);
+        rightServo.setPosition(rightBlockerOpenPosition);
     }
 
     public void close() {
-        if (direction.equals("left")){
-            blockerServo.setPosition(leftBlockerClosePosition);
-        } else {
-            blockerServo.setPosition(rightBlockerClosePosition);
-        }
+        leftServo.setPosition(leftBlockerClosePosition);
+        rightServo.setPosition(rightBlockerClosePosition);
     }
 }

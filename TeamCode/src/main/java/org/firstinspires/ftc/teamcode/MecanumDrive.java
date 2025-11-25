@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.teamcode.Constants.ka;
+
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.canvas.Canvas;
@@ -62,17 +64,15 @@ public final class MecanumDrive {
         public RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection =
                 RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD;
 
-               // drive model parameters
         // drive model parameters
-// drive model parameters
-        public double inPerTick = 0.00197895204;
-        public double lateralInPerTick = 0.0016144300223836373;
-        public double trackWidthTicks = 6161.661;
+        public double inPerTick = Constants.inPerTick;
+        public double lateralInPerTick = Constants.lateralInPerTick;
+        public double trackWidthTicks = Constants.trackWidth;
 
         // feedforward parameters (in tick units)
-        public double kS = 0.765501848421880;
-        public double kV = 0.00038766575519927663;
-        public double kA = 0.00004;
+        public double kS = Constants.ks;
+        public double kV = Constants.kv;
+        public double kA = Constants.ka;
 
         // path profile parameters (in inches)
         public double maxWheelVel = 50;
@@ -84,13 +84,13 @@ public final class MecanumDrive {
         public double maxAngAccel = Math.PI;
 
         // path controller gains
-        public double axialGain = 0.15;
-        public double lateralGain = 4;
-        public double headingGain = 0.7; // shared with turn
+        public double axialGain = Constants.axialGain;
+        public double lateralGain = Constants.lateralGain;
+        public double headingGain = Constants.headingGain; // shared with turn
 
-        public double axialVelGain = 0.2;
-        public double lateralVelGain = 2.4;
-        public double headingVelGain = 1.0; // shared with turn
+        public double axialVelGain = Constants.axialVelGain;
+        public double lateralVelGain = Constants.lateralVelGain;
+        public double headingVelGain = Constants.headingVelGain; // shared with turn
     }
 
     public static Params PARAMS = new Params();
@@ -141,8 +141,8 @@ public final class MecanumDrive {
 
             // TODO: reverse encoders if needed
             //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-            rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-            rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
             this.pose = pose;
         }
@@ -229,20 +229,23 @@ public final class MecanumDrive {
 
         // TODO: make sure your config has motors with these names (or change them)
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
-        leftFront = hardwareMap.get(DcMotorEx.class, "frontLeftMotor");
-        leftBack = hardwareMap.get(DcMotorEx.class, "backLeftMotor");
-        rightBack = hardwareMap.get(DcMotorEx.class, "backRightMotor");
-        rightFront = hardwareMap.get(DcMotorEx.class, "frontRightMotor");
+        leftFront = hardwareMap.get(DcMotorEx.class, Constants.leftFrontDriveMotor());
+        leftBack = hardwareMap.get(DcMotorEx.class, Constants.leftBackDriveMotor());
+        rightBack = hardwareMap.get(DcMotorEx.class, Constants.rightBackDriveMotor());
+        rightFront = hardwareMap.get(DcMotorEx.class, Constants.rightFrontDriveMotor());
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+
         // TODO: reverse motor directions if needed
         //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        //rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        //rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
 
@@ -253,7 +256,7 @@ public final class MecanumDrive {
 
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
-        localizer = new PinpointLocalizer(hardwareMap,PARAMS.inPerTick,pose);
+        localizer = new DriveLocalizer(pose);
 
         FlightRecorder.write("MECANUM_PARAMS", PARAMS);
     }
@@ -459,14 +462,14 @@ public final class MecanumDrive {
     public PoseVelocity2d updatePoseEstimate() {
         PoseVelocity2d vel = localizer.update();
         poseHistory.add(localizer.getPose());
-        
+
         while (poseHistory.size() > 100) {
             poseHistory.removeFirst();
         }
 
         estimatedPoseWriter.write(new PoseMessage(localizer.getPose()));
-        
-        
+
+
         return vel;
     }
 

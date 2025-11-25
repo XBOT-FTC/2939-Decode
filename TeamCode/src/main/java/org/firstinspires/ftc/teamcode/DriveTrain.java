@@ -43,14 +43,14 @@ public class DriveTrain {
 
     public void drive(Gamepad gamepad, Telemetry telemetry){
         double y = gamepad.left_stick_y;
-        double x = gamepad.left_stick_x * 1.1;
+        double x = -gamepad.left_stick_x * 1.1;
         double rx = -gamepad.right_stick_x;
 
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-        this.frontLeftPower = (y - x + rx) / denominator;
-        this.backLeftPower = (y + x + rx) / denominator;
-        this.frontRightPower = (y + x - rx) / denominator;
-        this.backRightPower = (y - x - rx) / denominator;
+        this.frontLeftPower = (y + x + rx) / denominator;
+        this.backLeftPower = (y - x + rx) / denominator;
+        this.frontRightPower = (y - x - rx) / denominator;
+        this.backRightPower = (y + x - rx) / denominator;
 
         frontLeftMotor.setPower(frontLeftPower);
         backLeftMotor.setPower(backLeftPower);
