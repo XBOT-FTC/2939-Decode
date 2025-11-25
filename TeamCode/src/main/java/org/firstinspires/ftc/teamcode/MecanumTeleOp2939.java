@@ -4,18 +4,19 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.commands.Intake;
+
 @TeleOp(name = "2025TeleOp2939", group="Linear OpMode")
 public class MecanumTeleOp2939 extends LinearOpMode {
 
     private enum ButtonState {
-        None,
         A,
         X,
         Y,
         B
     }
 
-    ButtonState buttonState = ButtonState.None;
+    ButtonState buttonState = ButtonState.X;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -33,6 +34,7 @@ public class MecanumTeleOp2939 extends LinearOpMode {
 
 
         while (opModeIsActive()) {
+            intake.run(gamepad2);
 
             // colorSensor.updateTelemetry();
             blocker.powerServo(operatorController, telemetry);
@@ -59,21 +61,21 @@ public class MecanumTeleOp2939 extends LinearOpMode {
                 buttonState = ButtonState.Y;
             } else if (wasXPressed && buttonState != ButtonState.X) {
                 buttonState = ButtonState.X;
-            } else {
-                buttonState = ButtonState.None;
             }
 
             switch (buttonState) {
                 case A:
                     shooter.shooter50();
+                    break;
                 case B:
                     shooter.shooter70();
+                    break;
                 case Y:
-                    shooter.shooter100();
+                    shooter.shooter85();
+                    break;
                 case X:
                     shooter.setZero();
-                case None:
-                    shooter.setZero();
+                    break;
             }
 
             //Telemetry for movement motors and shooters

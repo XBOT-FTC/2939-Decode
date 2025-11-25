@@ -1,10 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -50,8 +46,8 @@ public class Shooter {
         return this.shooterPower;
     }
 
-    public void shooter100() {
-        this.shooterPower = 1;
+    public void shooter85() {
+        this.shooterPower = 0.8;
         setMotorPower(this.shooterPower);
     }
 
@@ -61,7 +57,7 @@ public class Shooter {
     }
 
     public void shooter50() {
-        this.shooterPower = 0.5;
+        this.shooterPower = 0.6;
         setMotorPower(this.shooterPower);
     }
 
