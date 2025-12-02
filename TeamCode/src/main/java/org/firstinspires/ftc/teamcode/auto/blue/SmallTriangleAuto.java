@@ -10,18 +10,25 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.Shooter;
 
 @Autonomous(name = "BlueSmallTriangleAuto", group = "Autonomous")
 public class SmallTriangleAuto extends LinearOpMode {
 
+    Shooter shooter;
+
     @Override
     public void runOpMode(){
+
+
+
         Pose2d startingPose = new Pose2d(58, 0, Math.toRadians(-150));
 
         MecanumDrive drive = new MecanumDrive(hardwareMap, startingPose);
 
         Action trajectoryAction = drive.actionBuilder(startingPose)
                 .waitSeconds(6)
+
                 .strafeToSplineHeading(new Vector2d(43,-29),Math.toRadians(-90))
                 .splineToConstantHeading(new Vector2d(36,-56),Math.toRadians(-90))
                 .waitSeconds(1)

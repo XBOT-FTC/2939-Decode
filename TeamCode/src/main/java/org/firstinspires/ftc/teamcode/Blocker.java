@@ -9,9 +9,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Blocker {
     Servo leftServo = null;
     Servo rightServo = null;
-    double leftBlockerClosePosition = 0.87;
-    double leftBlockerOpenPosition = 0.78;
-    double rightBlockerClosePosition = 0.58;
+    double leftBlockerClosePosition = 0.78;
+    double leftBlockerOpenPosition = 0.6;
+    double rightBlockerClosePosition = 0.5;
     double rightBlockerOpenPosition = 0.72;
 
     // Fix twitches
