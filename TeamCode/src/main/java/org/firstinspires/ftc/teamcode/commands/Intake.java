@@ -8,11 +8,15 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 public class Intake {
     private final DcMotor intakeMotor;
 
+    public DcMotor getMotor() {
+        return intakeMotor;
+    }
+
     public Intake(HardwareMap hardwareMap) {
         this.intakeMotor = hardwareMap.dcMotor.get("intakeMotor");
         this.intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
     }
-    
+
     public void run(Gamepad gamepad) {
         if (gamepad.right_trigger >= 0.5) { // Intake
             intakeMotor.setPower(1.0);

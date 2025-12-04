@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.auto.red;
 
 import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -8,6 +9,7 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 import org.firstinspires.ftc.teamcode.Blocker;
@@ -32,7 +34,14 @@ public class MainAuto extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        Intake intake = new Intake(hardwareMap);
+
+
+        this.shooter = new Shooter(hardwareMap,telemetry);
+        this.intake = new Intake(hardwareMap);
+        this.blocker = new Blocker(hardwareMap,telemetry);
+        this.intakeMotor = intake.getMotor();
+        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
+
 
         Pose2d startingPose = new Pose2d(startPoseX, startPoseY, Math.toRadians(127));
 
@@ -42,11 +51,16 @@ public class MainAuto extends LinearOpMode {
                 .waitSeconds(6) //Replace this with shoot code
                 .strafeToSplineHeading(new Vector2d(-20, minYValue), Math.toRadians(90))
                 //Start intake
-                // NEED AFTER
+                .afterTime(0.0, AutoBlockClose())
+                .afterTime(0.0, AutoIntakeOn())
+
                 .splineToConstantHeading(new Vector2d(-11, maxYValue), Math.toRadians(90))
 
                 .strafeToSplineHeading(new Vector2d(startPoseX, startPoseY), Math.toRadians(127))
                 //stop intake
+                .afterTime(0.0, AutoBlockOpen())
+                .afterTime(0.0, AutoIntakeOff())
+
                 .waitSeconds(6) //Replace this with the shoot code
 
                 .strafeToSplineHeading(new Vector2d(3, minYValue), Math.toRadians(90))
@@ -82,18 +96,52 @@ public class MainAuto extends LinearOpMode {
 
     }
 
-    public Action intakeOnAction() {
+
+    public Action AutoIntakeOn() {
         return (telemetryPacket) -> {
             intakeMotor.setPower(1.0);
-            return false; // false = finishes immediately
+            return true;
         };
     }
 
-    public Action intakeOffAction() {
+    public Action AutoIntakeOff() {
         return (telemetryPacket) -> {
             intakeMotor.setPower(0);
             return false;
         };
     }
+
+    public Action AutoBlockClose(){
+        return(telemetryPacket) -> {
+            blocker.close();
+            return true;
+        };
+
+
+    }
+
+    public Action AutoBlockOpen(){
+        return(telemetryPacket) -> {
+            blocker.open();
+            return false;
+        };
+
+
+    }
+
+    public Action Shoot(){
+        return(telemetryPacket) -> {
+            shooter.setMotorPower(1);
+            return true;
+        };
+    }
+    public Action ShootOff(){
+        return(telemetryPacket) -> {
+            shooter.setMotorPower(0);
+            return false;
+        };
+    }
+
+
 
 }
