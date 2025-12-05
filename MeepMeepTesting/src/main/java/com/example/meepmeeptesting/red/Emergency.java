@@ -28,7 +28,7 @@ public class Emergency {
         robot.runAction(
                 robot.getDrive()
                     .actionBuilder(startingPose)
-                    .strafeToLinearHeading(new Vector2d(-9, 48), Math.toRadians(127))
+                    .strafeToLinearHeading(new Vector2d(-40, 48), Math.toRadians(127))
                     .waitSeconds(.5)
                     .build()
         );
