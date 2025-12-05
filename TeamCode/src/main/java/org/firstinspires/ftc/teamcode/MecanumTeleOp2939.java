@@ -61,17 +61,19 @@ public class MecanumTeleOp2939 extends LinearOpMode {
                 buttonState = ButtonState.Y;
             } else if (wasXPressed && buttonState != ButtonState.X) {
                 buttonState = ButtonState.X;
+            } else if  (gamepad2.dpad_left){
+                shooter.reverseMotor();
             }
 
             switch (buttonState) {
                 case A:
-                    shooter.shooter50();
+                    shooter.shooter55();
                     break;
                 case B:
-                    shooter.shooter70();
+                    shooter.shooter60();
                     break;
                 case Y:
-                    shooter.shooter85();
+                    shooter.shooter45();
                     break;
                 case X:
                     shooter.setZero();
