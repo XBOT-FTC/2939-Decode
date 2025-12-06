@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.teamcode.commands.Intake;
+
 
 @TeleOp(name = "2025TeleOp2939", group="Linear OpMode")
 public class MecanumTeleOp2939 extends LinearOpMode {
