@@ -8,10 +8,10 @@ public class DoubleBlocker {
     Servo blockerServo = null;
     boolean leftBumperPressed;
     boolean rightBumperPressed;
-    double leftBlockerClosePosition = 0.87;
-    double leftBlockerOpenPosition = 0.78;
-    double rightBlockerClosePosition = 0.415;
-    double rightBlockerOpenPosition = 0.5;
+    double leftBlockerClosePosition = 0.8;
+    double leftBlockerOpenPosition = 0.68;
+    double rightBlockerClosePosition = 0.45;
+    double rightBlockerOpenPosition = 0.8;
     String direction;
 
     // Fix twitches
