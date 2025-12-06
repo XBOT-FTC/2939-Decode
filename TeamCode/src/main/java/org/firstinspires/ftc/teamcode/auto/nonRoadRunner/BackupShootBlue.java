@@ -57,10 +57,10 @@ public class BackupShootBlue extends LinearOpMode {
         double BRposition = backRightDrive.getCurrentPosition();
 
 
-        backRightDrive.setTargetPosition(-2000);
-        backLeftDrive.setTargetPosition(-2000);
-        frontRightDrive.setTargetPosition(-2000);
-        frontLeftDrive.setTargetPosition(-2000);
+        backRightDrive.setTargetPosition(-1000);
+        backLeftDrive.setTargetPosition(-1000);
+        frontRightDrive.setTargetPosition(-1000);
+        frontLeftDrive.setTargetPosition(-1000);
 
         backRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -79,7 +79,7 @@ public class BackupShootBlue extends LinearOpMode {
             telemetry.addData("Positions", "frontLeft (%d), backLeft (%d), frontRight (%d), backRight (%d)", frontLeftDrive.getCurrentPosition(), frontRightDrive.getCurrentPosition(), backLeftDrive.getCurrentPosition(), backRightDrive.getCurrentPosition());
             telemetry.update();
         }
-        shooter.setMotorPower(0.7);
+        shooter.setMotorPower(0.45);
         moveStop();
         sleep(3000);
         intake.setCollectBalls();
