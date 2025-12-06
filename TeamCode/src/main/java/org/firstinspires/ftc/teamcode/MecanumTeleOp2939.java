@@ -24,7 +24,8 @@ public class MecanumTeleOp2939 extends LinearOpMode {
         Shooter shooter = new Shooter(hardwareMap, telemetry);
         // ColorSensing colorSensor = new ColorSensing(hardwareMap, telemetry);
         Intake intake = new Intake(hardwareMap);
-        DoubleBlocker doubleBlocker = new DoubleBlocker(hardwareMap, telemetry);
+        DoubleBlocker leftBlocker = new DoubleBlocker(hardwareMap, telemetry, "left");
+        DoubleBlocker rightBlocker = new DoubleBlocker(hardwareMap, telemetry, "right");
         waitForStart();
 
         if (isStopRequested()) return;
@@ -37,7 +38,7 @@ public class MecanumTeleOp2939 extends LinearOpMode {
             intake.run(gamepad2);
 
             // colorSensor.updateTelemetry();
-            doubleBlocker.powerServo(operatorController, telemetry);
+            leftBlocker.powerServo(operatorController, telemetry);
 
             //The Y button is for shooting
             //Use the Dpad to change the speed of the motors
@@ -85,8 +86,8 @@ public class MecanumTeleOp2939 extends LinearOpMode {
             telemetry.addData("shooter", "shooter(%.2f)", shooter.getShooterPower());
             telemetry.addData("shooter encoder", "shooter encoder (%.2f), ", shooter.shooterEncoderPosition());
             telemetry.addData("intake","intake (%.2f)", intake.getIntakePower());
-            telemetry.addData("Blocker left", "blocker left position (%.2f), ", doubleBlocker.getLeftServoPosition());
-            telemetry.addData("Blocker right", "block right position (%.2f), ", doubleBlocker.getRightServoPosition());
+            telemetry.addData("Blocker left", "blocker left position (%.2f), ", leftBlocker.getServoPosition());
+            telemetry.addData("Blocker right", "block right position (%.2f), ", rightBlocker.getServoPosition());
             telemetry.update();
         }
     }
