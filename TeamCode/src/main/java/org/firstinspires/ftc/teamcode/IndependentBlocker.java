@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Blocker {
+public class IndependentBlocker {
     Servo leftServo = null;
     Servo rightServo = null;
     double leftBlockerClosePosition = 0.78;
@@ -20,7 +20,7 @@ public class Blocker {
     boolean isOpen = false;
 
 
-    public Blocker(HardwareMap hardwareMap, Telemetry telemetry) {
+    public IndependentBlocker(HardwareMap hardwareMap, Telemetry telemetry) {
         leftServo = hardwareMap.get(Servo.class,"left");
         rightServo = hardwareMap.get(Servo.class,"right");
     }
