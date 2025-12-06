@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.commands;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake {
     private final DcMotor intakeMotor;
@@ -13,7 +13,7 @@ public class Intake {
         this.intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
     }
     
-    public void run(Gamepad gamepad) {
+    public void  run(Gamepad gamepad) {
         if (gamepad.right_trigger >= 0.5) { // Intake
             intakeMotor.setPower(1.0);
         } else if (gamepad.left_trigger >= 0.5) { // Outtake
