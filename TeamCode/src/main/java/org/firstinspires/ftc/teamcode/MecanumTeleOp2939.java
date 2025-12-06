@@ -39,6 +39,7 @@ public class MecanumTeleOp2939 extends LinearOpMode {
 
             // colorSensor.updateTelemetry();
             leftBlocker.powerServo(operatorController, telemetry);
+            rightBlocker.powerServo(operatorController, telemetry);
 
             //The Y button is for shooting
             //Use the Dpad to change the speed of the motors
