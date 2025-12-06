@@ -1,4 +1,3 @@
-
 package org.firstinspires.ftc.teamcode.auto.nonRoadRunner;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -16,9 +15,9 @@ import org.firstinspires.ftc.teamcode.Shooter;
  * the autonomous or the teleop period of an Fh * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="BackupShootBlue", group="Autonomous")
+@Autonomous(name="BackupShootRed", group="Autonomous")
 //@Disabled
-public class BackupShootBlue extends LinearOpMode {
+public class BackupShootRed extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -92,12 +91,12 @@ public class BackupShootBlue extends LinearOpMode {
         backLeftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        backRightDrive.setTargetPosition(1000);
-        backLeftDrive.setTargetPosition(-1000);
-        frontRightDrive.setTargetPosition(-1000);
-        frontLeftDrive.setTargetPosition(1000);
+        backRightDrive.setTargetPosition(-1000);
+        backLeftDrive.setTargetPosition(1000);
+        frontRightDrive.setTargetPosition(1000);
+        frontLeftDrive.setTargetPosition(-1000);
 
-        moveLinear(1, 3000, "Right");
+        moveLinear(1, 3000, "Left");
 
         backRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);

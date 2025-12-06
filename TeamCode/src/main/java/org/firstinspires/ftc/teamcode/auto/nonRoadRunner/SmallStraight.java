@@ -1,4 +1,3 @@
-
 package org.firstinspires.ftc.teamcode.auto.nonRoadRunner;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -7,8 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Constants;
-import org.firstinspires.ftc.teamcode.Intake;
-import org.firstinspires.ftc.teamcode.Shooter;
 
 
 /*
@@ -16,9 +13,9 @@ import org.firstinspires.ftc.teamcode.Shooter;
  * the autonomous or the teleop period of an Fh * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="BackupShootBlue", group="Autonomous")
+@Autonomous(name="SmallStraight", group="Autonomous")
 //@Disabled
-public class BackupShootBlue extends LinearOpMode {
+public class SmallStraight extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -29,7 +26,7 @@ public class BackupShootBlue extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        frontLeftDrive  = hardwareMap.get(DcMotor.class, Constants.leftFrontDriveMotor()); //0
+        frontLeftDrive = hardwareMap.get(DcMotor.class, Constants.leftFrontDriveMotor()); //0
         frontRightDrive = hardwareMap.get(DcMotor.class, Constants.rightFrontDriveMotor()); //3
         backLeftDrive = hardwareMap.get(DcMotor.class, Constants.leftBackDriveMotor()); //1
         backRightDrive = hardwareMap.get(DcMotor.class, Constants.rightBackDriveMotor()); //2
@@ -56,11 +53,10 @@ public class BackupShootBlue extends LinearOpMode {
         double BLposition = backLeftDrive.getCurrentPosition();
         double BRposition = backRightDrive.getCurrentPosition();
 
-
-        backRightDrive.setTargetPosition(-2000);
-        backLeftDrive.setTargetPosition(-2000);
-        frontRightDrive.setTargetPosition(-2000);
-        frontLeftDrive.setTargetPosition(-2000);
+        backRightDrive.setTargetPosition(1000);
+        backLeftDrive.setTargetPosition(1000);
+        frontRightDrive.setTargetPosition(1000);
+        frontLeftDrive.setTargetPosition(1000);
 
         backRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -72,44 +68,18 @@ public class BackupShootBlue extends LinearOpMode {
         frontRightDrive.setPower(.5);
         frontLeftDrive.setPower(.5);
 
-        Shooter shooter = new Shooter(hardwareMap, telemetry);
-        Intake intake = new Intake(hardwareMap);
 
-        while(frontLeftDrive.isBusy() && frontRightDrive.isBusy() && backLeftDrive.isBusy() && backRightDrive.isBusy()) {
+        while (frontLeftDrive.isBusy() && frontRightDrive.isBusy() && backLeftDrive.isBusy() && backRightDrive.isBusy()) {
             telemetry.addData("Positions", "frontLeft (%d), backLeft (%d), frontRight (%d), backRight (%d)", frontLeftDrive.getCurrentPosition(), frontRightDrive.getCurrentPosition(), backLeftDrive.getCurrentPosition(), backRightDrive.getCurrentPosition());
             telemetry.update();
         }
-        shooter.setMotorPower(0.7);
         moveStop();
-        sleep(3000);
-        intake.setCollectBalls();
-        sleep(2000);
-        intake.setStopCollecting();
-
-        // Left:
-        frontLeftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        backRightDrive.setTargetPosition(1000);
-        backLeftDrive.setTargetPosition(-1000);
-        frontRightDrive.setTargetPosition(-1000);
-        frontLeftDrive.setTargetPosition(1000);
-
-        moveLinear(1, 3000, "Right");
-
-        backRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        sleep (2000);
-
-
+        moveLinear(.3, 2000, "forward");
+        moveStop();
 
 
     }
+
     public void moveLinear(double speed, int time, String direction) throws InterruptedException {
         if (direction.equalsIgnoreCase("Forward")) {
             setPower(speed, speed, speed, speed);
@@ -135,10 +105,10 @@ public class BackupShootBlue extends LinearOpMode {
 
 
     public void moveStop() {
-        setPower(0,0,0,0);
+        setPower(0, 0, 0, 0);
     }
 
-    public void moveRotation(double speed, int time, String direction) throws InterruptedException{
+    public void moveRotation(double speed, int time, String direction) throws InterruptedException {
         if (direction.equalsIgnoreCase("Left")) {
             setPower(-speed, speed, -speed, speed);
         }
@@ -147,5 +117,4 @@ public class BackupShootBlue extends LinearOpMode {
         }
         Thread.sleep(time);
     }
-
 }
