@@ -29,7 +29,7 @@ public class DriveTrain {
     public double getBackRightPower() {
         return this.backRightPower;
     }
-    public DriveTrain(HardwareMap hardwareMap, Telemetry telemetry) {
+    public DriveTrain(HardwareMap hardwareMap) {
         this.frontLeftMotor = hardwareMap.dcMotor.get(Constants.leftFrontDriveMotor());
         this.frontRightMotor = hardwareMap.dcMotor.get(Constants.rightFrontDriveMotor());
         this.backLeftMotor = hardwareMap.dcMotor.get(Constants.leftBackDriveMotor());
@@ -41,11 +41,24 @@ public class DriveTrain {
         this.backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void drive(Gamepad gamepad, Telemetry telemetry){
+    public void drive(Gamepad gamepad) {
         double y = gamepad.left_stick_y;
         double x = -gamepad.left_stick_x * 1.1;
         double rx = -gamepad.right_stick_x;
 
+        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+        this.frontLeftPower = (y + x + rx) / denominator;
+        this.backLeftPower = (y - x + rx) / denominator;
+        this.frontRightPower = (y - x - rx) / denominator;
+        this.backRightPower = (y + x - rx) / denominator;
+
+        frontLeftMotor.setPower(frontLeftPower);
+        backLeftMotor.setPower(backLeftPower);
+        frontRightMotor.setPower(frontRightPower);
+        backRightMotor.setPower(backRightPower);
+    }
+
+    public void drive(int x, int y, int rx) {
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
         this.frontLeftPower = (y + x + rx) / denominator;
         this.backLeftPower = (y - x + rx) / denominator;

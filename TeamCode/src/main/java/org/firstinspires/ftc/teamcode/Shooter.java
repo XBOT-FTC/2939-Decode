@@ -10,7 +10,7 @@ public class Shooter {
     //Shooters starting power constants
     public double shooterPower = Constants.shooterPower;
 
-    public Shooter(HardwareMap hardwareMap, Telemetry telemetry) {
+    public Shooter(HardwareMap hardwareMap) {
         this.shooterMotor = hardwareMap.dcMotor.get(Constants.shooterMotor());
         this.shooterMotor.setDirection(DcMotor.Direction.REVERSE);
     }

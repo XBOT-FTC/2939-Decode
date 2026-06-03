@@ -20,8 +20,8 @@ public class MecanumTeleOp2939 extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        DriveTrain driveTrain = new DriveTrain(hardwareMap, telemetry);
-        Shooter shooter = new Shooter(hardwareMap, telemetry);
+        DriveTrain driveTrain = new DriveTrain(hardwareMap);
+        Shooter shooter = new Shooter(hardwareMap);
         // ColorSensing colorSensor = new ColorSensing(hardwareMap, telemetry);
         Intake intake = new Intake(hardwareMap);
         DoubleBlocker leftBlocker = new DoubleBlocker(hardwareMap, telemetry, "left");
@@ -51,7 +51,7 @@ public class MecanumTeleOp2939 extends LinearOpMode {
             operatorController.copy(gamepad2);
 
             // Drivetrain code
-            driveTrain.drive(driverController, telemetry);
+            driveTrain.drive(driverController);
 
             //Shooting Code
             if (wasAPressed && buttonState != ButtonState.A) {
