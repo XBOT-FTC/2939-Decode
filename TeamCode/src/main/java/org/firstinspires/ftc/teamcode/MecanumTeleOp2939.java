@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.pedropathing.ivy.Scheduler;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -23,7 +24,7 @@ public class MecanumTeleOp2939 extends LinearOpMode {
         DriveTrain driveTrain = new DriveTrain(hardwareMap, telemetry);
         Shooter shooter = new Shooter(hardwareMap, telemetry);
         // ColorSensing colorSensor = new ColorSensing(hardwareMap, telemetry);
-        Intake intake = new Intake(hardwareMap);
+        Intake intake = new Intake(hardwareMap, telemetry);
         DoubleBlocker leftBlocker = new DoubleBlocker(hardwareMap, telemetry, "left");
         DoubleBlocker rightBlocker = new DoubleBlocker(hardwareMap, telemetry, "right");
         waitForStart();
@@ -35,7 +36,16 @@ public class MecanumTeleOp2939 extends LinearOpMode {
 
 
         while (opModeIsActive()) {
-            intake.run(gamepad2);
+            // Right trigger = intake, left trigger = outtake
+            if (gamepad2.right_trigger >= 0.5) {
+                intake.on().schedule();
+            } else if (gamepad2.left_trigger >= 0.5) {
+                intake.reverse().schedule();
+            } else {
+                intake.off().schedule();
+            }
+            Scheduler.execute();
+            intake.periodic();
 
             // colorSensor.updateTelemetry();
             leftBlocker.powerServo(operatorController, telemetry);
@@ -85,7 +95,6 @@ public class MecanumTeleOp2939 extends LinearOpMode {
             telemetry.addData("motors", "frontLeft(%.2f) frontRight(%.2f) backLeft(%.2f) backRight(%.2f)", driveTrain.getFrontLeftPower(), driveTrain.getFrontRightPower(), driveTrain.getBackLeftPower(), driveTrain.getBackRightPower());
             telemetry.addData("shooter", "shooter(%.2f)", shooter.getShooterPower());
             telemetry.addData("shooter encoder", "shooter encoder (%.2f), ", shooter.shooterEncoderPosition());
-            telemetry.addData("intake","intake (%.2f)", intake.getIntakePower());
             telemetry.addData("Blocker left", "blocker left position (%.2f), ", leftBlocker.getServoPosition());
             telemetry.addData("Blocker right", "block right position (%.2f), ", rightBlocker.getServoPosition());
             telemetry.update();

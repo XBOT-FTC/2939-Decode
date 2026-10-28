@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Constants;
+import com.pedropathing.ivy.Scheduler;
 import org.firstinspires.ftc.teamcode.Intake;
 import org.firstinspires.ftc.teamcode.Shooter;
 
@@ -74,7 +75,7 @@ public class BackupShootBlueDelayed extends LinearOpMode {
         frontLeftDrive.setPower(.5);
 
         Shooter shooter = new Shooter(hardwareMap, telemetry);
-        Intake intake = new Intake(hardwareMap);
+        Intake intake = new Intake(hardwareMap, telemetry);
 
         while(frontLeftDrive.isBusy() && frontRightDrive.isBusy() && backLeftDrive.isBusy() && backRightDrive.isBusy()) {
             telemetry.addData("Positions", "frontLeft (%d), backLeft (%d), frontRight (%d), backRight (%d)", frontLeftDrive.getCurrentPosition(), frontRightDrive.getCurrentPosition(), backLeftDrive.getCurrentPosition(), backRightDrive.getCurrentPosition());
@@ -83,9 +84,13 @@ public class BackupShootBlueDelayed extends LinearOpMode {
         shooter.setMotorPower(0.45);
         moveStop();
         sleep(3000);
-        intake.setCollectBalls();
+        intake.on().schedule();
+        Scheduler.execute();
+        intake.periodic();
         sleep(2000);
-        intake.setStopCollecting();
+        intake.off().schedule();
+        Scheduler.execute();
+        intake.periodic();
 
         // Left:
         frontLeftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
