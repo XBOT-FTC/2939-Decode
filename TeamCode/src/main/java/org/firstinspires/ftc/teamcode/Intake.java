@@ -7,11 +7,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Intake {
+public class gIntake {
     private final DcMotor intakeMotor;
 
     public Intake(HardwareMap hardwareMap) {
-        this.intakeMotor = hardwareMap.dcMotor.get("intakeMotor");
+        this.intakeMotor = hardwareMap.dcMotor.get(Constants.intakeMotor());
         this.intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 

@@ -5,7 +5,7 @@ public class Constants {
     //Motor Constants
     //Port 3
     public static String leftFrontDriveMotor(){
-       return "frontLeftMotor";
+        return "frontLeftMotor";
     }
     //Port 0
     public static String rightFrontDriveMotor(){
@@ -33,6 +33,11 @@ public class Constants {
 //    public static final double maxWheelVel = 50;
 //    public static final double minProfileAccel = -30;
 //    public static final double maxProfileAccel = 50;
+
+    // Intake Constants
+    public static String intakeMotor(){
+        return "intakeMotor";
+    }
 
     // Shooter Constants
     public static String shooterMotor(){
