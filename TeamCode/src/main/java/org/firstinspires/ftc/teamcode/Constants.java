@@ -4,19 +4,19 @@ public class Constants {
 
     //Motor Constants
     //Port 3
-    public static String leftFrontDriveMotor(){
+    public static String leftFrontDriveMotor() {
         return "frontLeftMotor";
     }
     //Port 0
-    public static String rightFrontDriveMotor(){
+    public static String rightFrontDriveMotor() {
         return "frontRightMotor";
     }
     //Port 2
-    public static String leftBackDriveMotor(){
+    public static String leftBackDriveMotor() {
         return "backLeftMotor";
     }
     //Port 1
-    public static String rightBackDriveMotor(){
+    public static String rightBackDriveMotor() {
         return "backRightMotor";
     }
 
@@ -35,12 +35,12 @@ public class Constants {
 //    public static final double maxProfileAccel = 50;
 
     // Intake Constants
-    public static String intakeMotor(){
+    public static String intakeMotor() {
         return "intakeMotor";
     }
 
     // Shooter Constants
-    public static String shooterMotor(){
+    public static String shooterMotor() {
         return "shooterMotor";
     }
 
